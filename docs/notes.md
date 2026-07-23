@@ -19,7 +19,7 @@
 
 # Success Criteria
 
-* [ ] Load the dataset
+* [x] Load the dataset
 * [ ] Understand every column
 * [ ] Clean missing values
 * [ ] Encode categorical features
