@@ -100,32 +100,37 @@ Model saving
 
 # Project Structure
 
+- `notebooks/` contains exploratory analysis and experiments.
+- `src/` contains reusable machine learning code.
+- `scripts/` contains executable commands for downloading data, training, predicting, and resetting the project.
+- `docs/` contains project notes and decisions.
+- `pyproject.toml` and `uv.lock` define the reproducible Python environment.
+
 ```
 titanic-survival-prediction/
-
-├── data/
-│   └── preprocessed/
-│       └── processed.csv
-│   └── raw/
-│       └── train.csv
+│
+├── docs/
+│   └── notes.md
 │
 ├── notebooks/
 │   └── titanic_survival.ipynb
 │
-├── models/
-│   └── saved trained models
-│
 ├── scripts/
-│   └── download.py
+│   ├── download.py
+│   ├── train.py
+│   ├── predict.py
+│   └── reset.py
 │
 ├── src/
-│   └── reusable machine learning code
+│   ├── model.py
+│   └── preprocessing.py
 │
-├── docs/
-│   └── learning_notes.md
-│
+├── .gitignore
+├── .python-version
 ├── README.md
-└── requirements.txt
+├── pyproject.toml
+├── requirements.txt
+└── uv.lock
 ```
 
 ---
