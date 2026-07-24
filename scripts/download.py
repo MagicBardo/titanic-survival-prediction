@@ -31,7 +31,7 @@ data_description = """Data Dictionary:
 | fare     | Passenger fare                              |                                          |
 | cabin    | Cabin number                                |                                          |
 | embarked | Port of Embarkation                         | C = Cherbourg, Q = Queenstown, S =       |
-|          |                                             | Southampton                               |
+|          |                                             | Southampton                              |
 +----------+---------------------------------------------+------------------------------------------+
 
 Notes:
@@ -50,8 +50,7 @@ Spouse = husband, wife (mistresses and fiancés were ignored)
 parch: The dataset defines family relations in this way...
 Parent = mother, father
 Child = daughter, son, stepdaughter, stepson
-Some children travelled only with a nanny, therefore parch=0 for them.
-"""
+Some children traveled only with a nanny, therefore parch=0 for them."""
 
 # Competition
 COMPETITION = "titanic"

@@ -20,7 +20,7 @@
 # Success Criteria
 
 * [x] Load the dataset
-* [ ] Understand every column
+* [x] Understand every column
 * [ ] Clean missing values
 * [ ] Encode categorical features
 * [ ] Create at least one engineered feature
@@ -39,10 +39,10 @@ Understand what every column means.
 
 ### Tasks
 
-* [ ] Read the Kaggle data description
-* [ ] Run `df.head()`
-* [ ] Run `df.info()`
-* [ ] Run `df.describe()`
+* [x] Read the Kaggle data description
+* [x] Run `df.head()`
+* [x] Run `df.info()`
+* [x] Run `df.describe()`
 
 ### Useful Code
 
@@ -58,26 +58,29 @@ df.describe()
 
 ### Column Understanding Table
 
-| Column      | What it means | Numeric / Categorical | Keep? |
-| ----------- | ------------- | --------------------- | ----- |
-| PassengerId |               |                       |       |
-| Survived    |               |                       |       |
-| Pclass      |               |                       |       |
-| Name        |               |                       |       |
-| Sex         |               |                       |       |
-| Age         |               |                       |       |
-| SibSp       |               |                       |       |
-| Parch       |               |                       |       |
-| Ticket      |               |                       |       |
-| Fare        |               |                       |       |
-| Cabin       |               |                       |       |
-| Embarked    |               |                       |       |
+| Column      | What it means     | Numeric / Categorical | Keep? |
+| ----------- |-------------------|-----------------------|-------|
+| PassengerId | numeration        | numeric               | no    |
+| Survived    | alive or not      | categorical           | yes   |
+| Pclass      | proxy for SES     | categorical           | yes   |
+| Name        | name              | categorical           | no    |
+| Sex         | sex               | categorical           | yes   |
+| Age         | age               | numerical             | yes   |
+| SibSp       | # of sibs/spouses | numerical             | yes   |
+| Parch       | # of parents/kids | numerical             | yes   |
+| Ticket      | ticket number     | numerical             | no    |
+| Fare        | passenger fare    | numerical             | no    |
+| Cabin       | cabin number      | numerical             | no    |
+| Embarked    | entry port        | categorical           | yes   |
 
 ### My Notes
 
 * Which columns are immediately understandable?
+  * survival, pclass, sex, age, embarked
 * Which columns confuse me?
+  * sibsp, parch, cabin
 * Which columns seem most likely to influence survival?
+  * sex, age, pclass?
 
 ---
 
@@ -89,10 +92,10 @@ Find problems in the dataset.
 
 ### Tasks
 
-* [ ] Check missing values
-* [ ] Check duplicates
-* [ ] Inspect distributions
-* [ ] Look for impossible values
+* [x] Check missing values
+* [x] Check duplicates
+* [x] Inspect distributions
+* [x] Look for impossible values
 
 ### Useful Code
 
@@ -106,17 +109,20 @@ df["Fare"].hist()
 
 ### Missing Values
 
-| Column   | Missing Count | % Missing | My Decision |
-| -------- | ------------: | --------: | ----------- |
-| Age      |               |           |             |
-| Cabin    |               |           |             |
-| Embarked |               |           |             |
+| Column   | Missing Count | % Missing | My Decision                                     |
+| -------- | ------------: |----------:|-------------------------------------------------|
+| Age      |           177 |   19.87 % | fill with median (because left tweek)           |
+| Cabin    |           687 |   77.10 % | drop and add col "has cabin"                    |
+| Embarked |             2 |    0.22 % | assign both C because high fare and same cabin  |
 
 ### My Notes
 
 * Which column has the most missing values?
+  * cabin
 * Does missing data have a meaning? (e.g. no cabin assigned)
+  * person was illegally on board, cabin wasn't recorded  
 * What surprised me?
+  * so many passangers have no cabin assigned, mostly in 3rd class
 
 ---
 
@@ -128,10 +134,10 @@ Create a consistent dataset.
 
 ### Tasks
 
-* [ ] Remove duplicates
-* [ ] Drop useless columns
-* [ ] Fill missing values
-* [ ] Fix data types
+* [x] Remove duplicates
+* [x] Fill missing values
+* [x] Drop useless columns
+* [x] Fix data types
 
 ### Useful Code
 
@@ -149,20 +155,14 @@ df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
 df = df.drop(columns=["PassengerId"])
 ```
 
-### Cleaning Decisions
-
-| Column      | Action           | Why?              |
-| ----------- | ---------------- | ----------------- |
-| PassengerId | Drop             | Unique identifier |
-| Age         | Fill with median |                   |
-| Embarked    | Fill with mode   |                   |
-| Cabin       | ?                |                   |
-
 ### My Notes
 
 * Why did I choose median instead of mean?
+  * because of the left tweek → not a normal distribution
 * Why did I drop PassengerId?
+  * because there is the index of the dataframe (basically the same)
 * Am I unsure about any column?
+  * no
 
 ---
 
@@ -174,7 +174,7 @@ Create better information for the model.
 
 ### Tasks
 
-* [ ] Create FamilySize
+* [x] Create FamilySize
 * [ ] Extract Title from Name
 * [ ] Consider age groups
 
@@ -193,15 +193,19 @@ df[["Name", "Title"]].head()
 
 ### Features I Created
 
-| New Feature | Formula / Source    | Why it may help |
-| ----------- | ------------------- | --------------- |
-| FamilySize  | SibSp + Parch + 1   |                 |
-| Title       | Extracted from Name |                 |
+| New Feature | Formula / Source             | Why it may help            |
+|-------------|------------------------------|----------------------------|
+| Family_Size | SibSp + Parch + 1            | combines cols              |
+| Title       | Extracted from Name          | shows age and social group |
+| Age_Group   | different borders (see code) | more precises grouping     |
+| Has_Cabin   | cabin number -> 1, NaN -> 0  | fixed NaN in cabin         |
 
 ### My Notes
 
 * Did the new feature make intuitive sense?
+  * mostly
 * Would a human use this information?
+  * probably in a bit different formatting, but yes
 
 ---
 
@@ -213,9 +217,9 @@ Convert text into numbers.
 
 ### Tasks
 
-* [ ] Identify text columns
-* [ ] Encode them
-* [ ] Verify all remaining columns are numeric
+* [x] Identify text columns
+* [x] Encode them
+* [x] Verify all remaining columns are numeric
 
 ### Useful Code
 
@@ -234,14 +238,14 @@ df.dtypes
 
 Write them here before encoding:
 
-* ---
-* ---
-* ---
+* Title
 
 ### My Notes
 
 * Why can't ML models use raw text?
+  * Don't know what text is, just knows numbers and their correlation
 * What does one-hot encoding actually create?
+  * splits column into multiple columns with all the options and just ones and zeros or True and False
 
 ---
 
@@ -253,9 +257,9 @@ Split questions from answers.
 
 ### Tasks
 
-* [ ] Create X
-* [ ] Create y
-* [ ] Check shapes
+* [x] Create X
+* [x] Create y
+* [x] Check shapes
 
 ### Useful Code
 
@@ -271,8 +275,8 @@ print(y.shape)
 
 **In my own words:**
 
-* X = ______________________________________
-* y = ______________________________________
+* X = data that influences the survival 
+* y = the parameter that is influenced
 
 ---
 
@@ -284,9 +288,9 @@ Create a fair evaluation.
 
 ### Tasks
 
-* [ ] Import train_test_split
-* [ ] Split the data
-* [ ] Verify sizes
+* [x] Import train_test_split
+* [x] Split the data
+* [x] Verify sizes
 
 ### Useful Code
 
@@ -313,8 +317,11 @@ print(y_test.shape)
 ### My Notes
 
 * What does `test_size=0.2` mean?
+  * partial size of the test data relative to the whole dataset, rest is training data
 * What does `random_state=42` do?
+  * the lines for test data are chosen randomly, but the product needs to be reproducible (always in data science), so you need a relative constant
 * Why must the test set stay untouched?
+  * it is random and shouldn't be influenced and not seen by the program ever
 
 ---
 
@@ -332,8 +339,8 @@ Pick a first classifier.
 
 ### Tasks
 
-* [ ] Import DecisionTreeClassifier
-* [ ] Create the model object
+* [x] Import DecisionTreeClassifier
+* [x] Create the model object
 
 ### Useful Code
 
@@ -346,7 +353,9 @@ model = DecisionTreeClassifier(random_state=42)
 ### My Notes
 
 * Why is this a **classification** problem?
+  * because we coose between *survived* and *not survived* (two Categories → categorical)
 * What kind of output will the model produce?
+  * binary (0 or 1)
 
 ---
 
@@ -358,8 +367,8 @@ Let the model learn patterns.
 
 ### Tasks
 
-* [ ] Call `.fit()`
-* [ ] Confirm training completed
+* [x] Call `.fit()`
+* [x] Confirm training completed
 
 ### Useful Code
 
@@ -377,7 +386,7 @@ model.fit(X_train, y_train)
 
 Explain `.fit()` in one sentence:
 
-> ---
+> The fit method creates rules for deciding if a passenger survives or not based on the given parameters
 
 ---
 
@@ -408,7 +417,9 @@ comparison.head(10)
 ### My Notes
 
 * Which rows were wrong?
+  * ids 709, 39
 * Do I notice a pattern?
+  * no, seems pretty random
 
 ---
 
@@ -438,14 +449,16 @@ print(cm)
 
 ### Interpretation
 
-Accuracy = ____________________
+Accuracy = 0.799 means that around 80% of the predictions were correct
 
-This means: ________________________________________
+This means: more than three quarters of the predictions are correct, which seems pretty good
 
 ### My Notes
 
 * Is the accuracy better than random guessing?
+  * yes
 * Is one class predicted better than the other?
+  * the 0 class has 89 correct predictions, class 1 just 54 → not that different but still a difference (0.82 vs 0.77)
 
 ---
 
@@ -469,17 +482,22 @@ model = DecisionTreeClassifier(
 
 ### Experiments
 
-| Experiment | What I changed   | Accuracy |
-| ---------- | ---------------- | -------: |
-| Baseline   | Default tree     |          |
-| Exp 1      | max_depth=4      |          |
-| Exp 2      | Added FamilySize |          |
+| Experiment | What I changed                        |         Accuracy |
+|------------|---------------------------------------|-----------------:|
+| Baseline   | Default tree                          | 0.799 (89 vs 54) |
+| Exp 1      | max_depth=4                           | 0.793 (92 vs 50) |
+| Exp 2      | Added Family_Size                     | 0.777 (89 vs 50) |
+| Exp 3      | Added Family_Size + <br/>max_depth=4  | 0.816 (89 vs 57) |
+| Exp 4      | max_depth=10                          | 0.793 (88 vs 54) |
+| Exp 5      | Added Family_Size + <br/>max_depth=10 | 0.788 (90 vs 51) |
+| Exp 6      | max_depth=6                           | 0.782 (92 vs 48) |
+| Exp 7      | Added Family_Size + <br/>max_depth=6  | 0.804 (94 vs 50) |
+| Exp 8      | Added Family_Size + <br/>max_depth=5  | 0.816 (91 vs 55) |
 
 ### My Notes
 
-What change helped the most?
-
----
+* What change helped the most?
+  * Adding the Family_Size together with the deeper tree, they were bad as a single change, but not too deep
 
 ---
 
@@ -496,9 +514,8 @@ with open("titanic_model.pkl", "wb") as f:
 
 ### My Notes
 
-Why save the model instead of retraining every time?
-
----
+* Why save the model instead of retraining every time?
+  * because it needs time and is useless and needs space in working memory
 
 ---
 
@@ -506,24 +523,30 @@ Why save the model instead of retraining every time?
 
 ## Explain these concepts without looking them up
 
-* [ ] Feature
-* [ ] Target
-* [ ] Training data
-* [ ] Test data
-* [ ] Classification
-* [ ] Generalization
-* [ ] Overfitting
-* [ ] Accuracy
-* [ ] One-hot encoding
+* [x] Feature
+* [x] Target
+* [x] Training data
+* [x] Test data
+* [x] Classification
+* [x] Generalization
+* [x] Overfitting
+* [x] Accuracy
+* [x] One-hot encoding
 
 ## Biggest thing I learned
+  
+You can "overtrain" an ML (overfitting) when it thinks too deeply
 
 ---
 
 ## Biggest thing that confused me
 
+Two changes on the model can both be bad when used alone but can improve the model when used together
+
 ---
 
 ## What I want to learn next
+
+What the scikit-learn methods do in detail and how they actually work 
 
 ---
