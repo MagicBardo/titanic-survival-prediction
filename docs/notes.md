@@ -21,13 +21,13 @@
 
 * [x] Load the dataset
 * [x] Understand every column
-* [ ] Clean missing values
-* [ ] Encode categorical features
-* [ ] Create at least one engineered feature
-* [ ] Split the data correctly
-* [ ] Train a classifier
-* [ ] Evaluate accuracy
-* [ ] Explain the results in your own words
+* [x] Clean missing values
+* [x] Encode categorical features
+* [x] Create at least one engineered feature
+* [x] Split the data correctly
+* [x] Train a classifier
+* [x] Evaluate accuracy
+* [x] Explain the results in your own words
 
 ---
 

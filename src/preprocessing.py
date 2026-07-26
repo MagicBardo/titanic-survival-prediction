@@ -1,10 +1,23 @@
 import pandas as pd
 
-path = "../data/raw/train.csv"
-titanic_dataframe = pd.read_csv(path)
-
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.impute import SimpleImputer
 
 def age_group(age: int) -> str:
+    """
+    Helper function for age grouping
+
+    Parameters
+    ----------
+    age (int)
+
+    Returns
+    -------
+    age corresponding title (str)
+    """
+
     if age < 1:
         return "Baby"
     elif 1 <= age < 3:
@@ -21,7 +34,20 @@ def age_group(age: int) -> str:
         return "untitled"
 
 
-def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
+def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Clean and preprocess data including dropping and creating rows
+    Afterward, data is already in one-hot encoding usable for training
+
+    Parameters
+    ----------
+    df (pd.DataFrame):
+
+    Returns
+    -------
+    df (pd.DataFrame):
+    """
+
     df = df.drop_duplicates()
 
     df["Age"] = df["Age"].fillna(
@@ -52,12 +78,6 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
         loc=6,
         column="Has_Cabin",
         value=column
-    )
-
-    df = pd.get_dummies(
-        df,
-        columns=["Sex", "Pclass", "Embarked"],
-        dtype=int
     )
 
     df["Family_Size"] = df["SibSp"] + df["Parch"] + 1
@@ -95,30 +115,62 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
 
     df["Age_Group"] = df["Age"].apply(age_group)
 
-    df = pd.get_dummies(
-        df,
-        columns=["Age_Group"],
-        dtype=int
-    )
-
-    df.drop(
+    df = df.drop(
         labels="Name",
-        axis=1,
-        inplace=True
-    )
-
-    df = pd.get_dummies(
-        df,
-        columns=["Title"],
-        drop_first=True,
-        dtype=int
+        axis=1
     )
 
 
     return df
 
 
-if __name__ == "__main__":
-    print("Data preparation started")
-    preprocess_data(titanic_dataframe)
-    print("Data preparation finished")
+def create_preprocessing_pipeline():
+    numerical_features = [
+        "Age",
+        "Family_Size"
+    ]
+
+    categorical_features = [
+        "Sex",
+        "Pclass",
+        "Age_Group",
+        "Title",
+        "Has_Cabin",
+        "Embarked"
+    ]
+
+    # This step was already done in the engineering processing but still here for logic second safety
+    numerical_pipeline = Pipeline([
+        (
+            "imputer",
+            SimpleImputer(strategy="median")
+        )
+    ])
+
+    categorical_pipeline = Pipeline([
+        # This step was already done in the engineering processing but still here for logic second safety
+        (
+            "imputer",
+            SimpleImputer(strategy="most_frequent")
+        ),
+        # Splitting categories into binary columns
+        (
+            "encoder",
+            OneHotEncoder(
+                handle_unknown="ignore"
+            )
+        )
+    ])
+
+    return ColumnTransformer([
+        (
+            "num",
+            numerical_pipeline,
+            numerical_features
+        ),
+        (
+            "cat",
+            categorical_pipeline,
+            categorical_features
+        )
+    ])

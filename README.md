@@ -234,7 +234,7 @@ Models are evaluated and compared using classification metrics.
 
 # Results
 
-Results will be added after completing the experiments.
+Results will be logged after completing accuracy experiments.
 
 Example:
 

@@ -28,5 +28,21 @@ def reset_data_folder():
     print("Data folder reset successfully.")
 
 
-if __name__ == "__main__":
+def reset_models_folder():
+    project_root = find_project_root()
+    models_dir = project_root / "models"
+
+    if models_dir.exists():
+        shutil.rmtree(models_dir)
+
+    print("Models folder reset successfully.")
+
+
+def reset():
+    print("Resetting project...")
     reset_data_folder()
+    reset_models_folder()
+
+
+if __name__ == "__main__":
+    reset()
