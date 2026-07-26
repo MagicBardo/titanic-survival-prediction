@@ -1,48 +1,44 @@
-from pathlib import Path
 import shutil
 
-
-def find_project_root() -> Path:
-    current = Path.cwd()
-
-    while current != current.parent:
-        if (current / "pyproject.toml").exists():
-            return current
-        current = current.parent
-
-    raise FileNotFoundError("Could not find project root")
+from src.paths import DATA, RAW_DATA, PROCESSED_DATA, MODELS, LOGS
 
 
 def reset_data_folder():
-    project_root = find_project_root()
-    data_dir = project_root / "data"
+    if DATA.exists():
+        shutil.rmtree(DATA)
 
-    # Delete existing data folder
-    if data_dir.exists():
-        shutil.rmtree(data_dir)
-
-    # Recreate structure
-    (data_dir / "raw").mkdir(parents=True)
-    (data_dir / "processed").mkdir(parents=True)
+    RAW_DATA.mkdir(parents=True)
+    PROCESSED_DATA.mkdir(parents=True)
 
     print("Data folder reset successfully.")
 
 
 def reset_models_folder():
-    project_root = find_project_root()
-    models_dir = project_root / "models"
+    if MODELS.exists():
+        shutil.rmtree(MODELS)
 
-    if models_dir.exists():
-        shutil.rmtree(models_dir)
+    MODELS.mkdir(parents=True)
 
     print("Models folder reset successfully.")
+
+def reset_logs_folder():
+    if LOGS.exists():
+        shutil.rmtree(LOGS)
+
+    LOGS.mkdir(parents=True)
+
+    print("Logs folder reset successfully.")
 
 
 def reset():
     print("Resetting project...")
-    reset_data_folder()
-    reset_models_folder()
-    print("Project reset successfully.")
+    if input(f"This would delete all files and subdirectories of '{DATA}'. Continue? (y/n): ").lower() == "y":
+        reset_data_folder()
+    if input(f"This would delete all files and subdirectories of '{MODELS}'. Continue? (y/n): ").lower() == "y":
+        reset_models_folder()
+    if input(f"This would delete all files and subdirectories of '{LOGS}'. Continue? (y/n): ").lower() == "y":
+        reset_logs_folder()
+    print("Project reset finished.")
 
 
 if __name__ == "__main__":

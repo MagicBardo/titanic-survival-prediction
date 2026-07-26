@@ -9,10 +9,8 @@ from sklearn.metrics import accuracy_score
 
 from src.preprocessing import engineer_features, create_preprocessing_pipeline
 from src.model import create_model, RANDOM_STATE
+from src.paths import RAW_DATA, MODELS, LOGS
 
-DATA_PATH = "../data/raw/train.csv"
-MODEL_PATH = "../models/titanic_model.pkl"
-LOG_PATH = "../logs/training.json"
 
 TARGET = "Survived"
 
@@ -53,7 +51,7 @@ def log_accuracy(pipeline, model_name, df,y_train, X_test, y_test) -> None:
         "test_size": y_test.shape[0]
     }
 
-    with open(LOG_PATH, "a") as f:
+    with open(LOGS / "training.json", "a") as f:
         json.dump(data, f)
 
 
@@ -70,7 +68,7 @@ def train(model_name:str) -> None:
     None
     """
 
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_csv(RAW_DATA / "train.csv")
 
     df = engineer_features(df)
 
@@ -104,7 +102,7 @@ def train(model_name:str) -> None:
 
     joblib.dump(
         pipeline,
-        MODEL_PATH
+        MODELS / "titanic_model.pkl"
     )
 
 
@@ -112,4 +110,5 @@ if __name__ == "__main__":
     model = input("Which model would you like to use?:\n")
     print("Training...")
     train(model)
+    print(f"Training results stored in {LOG_PATH}")
     print("Training finished!")

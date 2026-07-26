@@ -5,8 +5,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import SimpleImputer
 
-
-SAVE_PROCESS_PATH = "../data/processed/engineered.csv"
+from src.paths import PROCESSED_DATA
 
 
 def age_group(age: int) -> str:
@@ -52,7 +51,9 @@ def save_engineered_features(df: pd.DataFrame) -> None:
     None
     """
 
-    df.to_csv(SAVE_PROCESS_PATH, header=True, index=True)
+    df.to_csv(PROCESSED_DATA / "engineered.csv", header=True, index=True)
+
+    print(f"Training data was preprocessed successfully and saved in {PROCESSED_DATA}")
 
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:

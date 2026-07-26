@@ -3,19 +3,10 @@ import zipfile
 import shutil
 import kaggle
 
+from src.paths import RAW_DATA, TEMPORARY
+
 
 print("Started downloading dataset...")
-
-# Getting root for finding the top level data folder
-def find_project_root():
-    current = Path.cwd()
-
-    while current != current.parent:
-        if (current / "pyproject.toml").exists():
-            return current
-        current = current.parent
-
-    raise FileNotFoundError("Project root not found")
 
 # Description from kaggle page of competition
 # will be added as txt file into data/raw/ folder
@@ -59,31 +50,27 @@ Some children traveled only with a nanny, therefore parch=0 for them."""
 COMPETITION = "titanic"
 
 # Paths
-ROOT_DIR = find_project_root()
+RAW_DATA.mkdir(parents=True, exist_ok=True)
 
-DATA_DIR = ROOT_DIR / "data" / "raw"
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-
-DOWNLOAD_DIR = ROOT_DIR / "data" / "tmp"
-DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
+TEMPORARY.mkdir(parents=True, exist_ok=True)
 
 # Download dataset
 kaggle.api.competition_download_files(
     COMPETITION,
-    path=DOWNLOAD_DIR
+    path=TEMPORARY
 )
 
 # Extract only train.csv
-zip_file = DOWNLOAD_DIR / "titanic.zip"
+zip_file = TEMPORARY / "titanic.zip"
 
 with zipfile.ZipFile(zip_file, "r") as zip_ref:
-    zip_ref.extract("train.csv", DATA_DIR)
+    zip_ref.extract("train.csv", RAW_DATA)
 
 # Adding data description for train.csv
-with open(DATA_DIR / "description.txt", "w") as file:
+with open(RAW_DATA / "description.txt", "w") as file:
     file.write(data_description)
 
 # Cleanup
-shutil.rmtree(DOWNLOAD_DIR)
+shutil.rmtree(TEMPORARY)
 
 print("Dataset downloaded successfully.")
