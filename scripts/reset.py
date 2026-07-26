@@ -42,6 +42,7 @@ def reset():
     print("Resetting project...")
     reset_data_folder()
     reset_models_folder()
+    print("Project reset successfully.")
 
 
 if __name__ == "__main__":

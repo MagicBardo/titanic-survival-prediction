@@ -1512,6 +1512,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "ipykernel" },
+    { name = "joblib" },
     { name = "kaggle" },
     { name = "matplotlib" },
     { name = "numpy" },
@@ -1524,6 +1525,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ipykernel", specifier = ">=7.3.0" },
+    { name = "joblib", specifier = ">=1.5.3" },
     { name = "kaggle", specifier = ">=2.2.3" },
     { name = "matplotlib", specifier = ">=3.11.1" },
     { name = "numpy", specifier = ">=2.5.1" },

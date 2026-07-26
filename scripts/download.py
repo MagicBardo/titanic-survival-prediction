@@ -3,6 +3,9 @@ import zipfile
 import shutil
 import kaggle
 
+
+print("Started downloading dataset...")
+
 # Getting root for finding the top level data folder
 def find_project_root():
     current = Path.cwd()

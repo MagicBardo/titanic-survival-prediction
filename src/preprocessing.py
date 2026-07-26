@@ -36,8 +36,9 @@ def age_group(age: int) -> str:
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Clean and preprocess data including dropping and creating rows
-    Afterward, data is already in one-hot encoding usable for training
+    Titanic-specific feature engineering
+
+    Clean and preprocess data including dropping and creating rows and columns
 
     Parameters
     ----------
@@ -124,7 +125,21 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def create_preprocessing_pipeline():
+def create_preprocessing_pipeline() -> ColumnTransformer:
+    """
+    Scikit-learn preprocessing pipeline
+
+    Creating preprocessing pipeline for whole pipeline approach,
+    Fills missing values (already done by engineer_features(), see command),
+    One-Hot Encoding for all categorical features
+
+    Returns
+    -------
+    ColumnTransformer:
+        calls the here defined changes (Filling values, One-Hot Encoding) when used as a pipeline
+
+    """
+
     numerical_features = [
         "Age",
         "Family_Size"
