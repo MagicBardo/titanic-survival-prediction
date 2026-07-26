@@ -1,27 +1,37 @@
-# Python-generated files
+# Python
 __pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+*.py[cod]
+*.pyo
 
 # Virtual environments
-.venv
-
-# IDEs
 .venv/
+venv/
+
+# IDE
 .idea/
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
 
 # kaggle
 .kaggle/
 
-# data
+# Generated data
 data/raw/*
-data/preprocessed/*
+!data/raw/.gitkeep
 
-# models
+data/processed/*
+!data/processed/.gitkeep
+
+# Trained models
 models/*
+!models/.gitkeep
 
-# logs
+# Log files
 logs/*
+!logs/.gitkeep
+
+# Miscellaneous
+.DS_Store
+Thumbs.db

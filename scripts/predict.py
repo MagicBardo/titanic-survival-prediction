@@ -15,16 +15,16 @@ def main():
         {
             "PassengerId": 1,
             "Survived": 0,
-            "Pclass": 1,
-            "Name": "Smith, Miss. Example",
-            "Sex": "female",
-            "Age": 25,
-            "SibSp": 0,
+            "Pclass": 2,
+            "Name": "Smith, Mrs. Example",
+            "Sex": "male",
+            "Age": 10,
+            "SibSp": 7,
             "Parch": 0,
             "Ticket": "12345",
-            "Fare": 80,
-            "Cabin": "B57",
-            "Embarked": "C"
+            "Fare": 0,
+            "Cabin": None,
+            "Embarked": "S"
         }
     ])
 

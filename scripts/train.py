@@ -5,7 +5,7 @@ import datetime as dt
 
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 from titanic_ml.preprocessing import engineer_features, create_preprocessing_pipeline
 from titanic_ml.model import create_model, RANDOM_STATE
@@ -41,10 +41,16 @@ def log_accuracy(pipeline, model_name, df,y_train, X_test, y_test) -> None:
         predictions
     )
 
+    cm = confusion_matrix(y_test, predictions)
+
     data = {
         "timestamp": str(dt.datetime.now()),
         "model": model_name,
         "accuracy": accuracy,
+        "true_positive": int(cm[0, 0]),
+        "false_negative": int(cm[0, 1]),
+        "false_positive": int(cm[1, 0]),
+        "true_negative": int(cm[1, 1]),
         "features": df.drop(columns=[TARGET]).columns.to_list(),
         "random_state": RANDOM_STATE,
         "train_size": y_train.shape[0],
@@ -52,7 +58,7 @@ def log_accuracy(pipeline, model_name, df,y_train, X_test, y_test) -> None:
     }
 
     with open(LOGS / "training.json", "w") as f:
-        json.dump(data, f)
+        json.dump(data, f, indent=4)
 
 
 def main(model_name:str) -> None:
