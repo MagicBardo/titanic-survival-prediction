@@ -73,15 +73,13 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.drop_duplicates()
 
-    df["Age"] = df["Age"].fillna(
-        df["Age"].median()
-    )
+    df["Age"] = df["Age"].fillna(df["Age"].median())
 
-    df["Embarked"] = df["Embarked"].fillna(
-        "C"
-    )
+    df["Embarked"] = df["Embarked"].fillna("C")
 
     df["Has_Cabin"] = df["Cabin"].notna().astype(int)
+
+    df["Fare"] = df["Fare"].astype(float)
 
     df = df.drop(
         labels=["PassengerId", "Ticket", "Cabin"],
