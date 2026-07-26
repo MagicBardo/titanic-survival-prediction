@@ -55,7 +55,7 @@ def log_accuracy(pipeline, model_name, df,y_train, X_test, y_test) -> None:
         json.dump(data, f)
 
 
-def train(model_name:str) -> None:
+def main(model_name:str) -> None:
     """
 
     Parameters
@@ -109,6 +109,6 @@ def train(model_name:str) -> None:
 if __name__ == "__main__":
     model = input("Which model would you like to use?:\n")
     print("Training...")
-    train(model)
-    print(f"Training results stored in {LOG_PATH}")
+    main(model)
+    print(f"Training results stored in {LOGS}")
     print("Training finished!")

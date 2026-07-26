@@ -84,7 +84,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df["Has_Cabin"] = df["Cabin"].notna().astype(int)
 
     df = df.drop(
-        labels=["PassengerId", "Ticket", "Fare", "Cabin"],
+        labels=["PassengerId", "Ticket", "Cabin"],
         axis=1
     )
 
@@ -165,6 +165,7 @@ def create_preprocessing_pipeline() -> ColumnTransformer:
 
     numerical_features = [
         "Age",
+        "Fare",
         "Family_Size"
     ]
 
