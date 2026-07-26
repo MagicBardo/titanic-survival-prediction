@@ -5,6 +5,10 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import SimpleImputer
 
+
+SAVE_PROCESS_PATH = "../data/processed/engineered.csv"
+
+
 def age_group(age: int) -> str:
     """
     Helper function for age grouping
@@ -32,6 +36,23 @@ def age_group(age: int) -> str:
         return "Senior"
     else:
         return "untitled"
+
+
+def save_engineered_features(df: pd.DataFrame) -> None:
+    """
+    Saves engineered features as csv file for looking at used dataset in well readable format
+
+    Parameters
+    ----------
+    df (pd.DataFrame):
+        first processed dataframe
+
+    Returns
+    -------
+    None
+    """
+
+    df.to_csv(SAVE_PROCESS_PATH, header=True, index=True)
 
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -121,6 +142,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
         axis=1
     )
 
+    save_engineered_features(df)
 
     return df
 
