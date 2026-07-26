@@ -1507,35 +1507,6 @@ wheels = [
 ]
 
 [[package]]
-name = "titanic-survival-prediction"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "ipykernel" },
-    { name = "joblib" },
-    { name = "kaggle" },
-    { name = "matplotlib" },
-    { name = "numpy" },
-    { name = "pandas" },
-    { name = "pandas-stubs" },
-    { name = "pathlib" },
-    { name = "scikit-learn" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "ipykernel", specifier = ">=7.3.0" },
-    { name = "joblib", specifier = ">=1.5.3" },
-    { name = "kaggle", specifier = ">=2.2.3" },
-    { name = "matplotlib", specifier = ">=3.11.1" },
-    { name = "numpy", specifier = ">=2.5.1" },
-    { name = "pandas", specifier = ">=3.0.5" },
-    { name = "pandas-stubs", specifier = ">=3.0.3.260530" },
-    { name = "pathlib", specifier = ">=1.0.1" },
-    { name = "scikit-learn", specifier = ">=1.9.0" },
-]
-
-[[package]]
 name = "tornado"
 version = "6.5.7"
 source = { registry = "https://pypi.org/simple" }
