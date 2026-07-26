@@ -1,282 +1,210 @@
-# Titanic Survival Prediction 🚢
+# Titanic Survival Prediction
 
-A machine learning project that predicts whether a Titanic passenger survived based on passenger information.
-
-This project is my first complete machine learning workflow, covering the process from raw data exploration to a trained and evaluated classification model.
-
-The goal is not only to create a working model but to understand the principles behind data preprocessing, supervised learning, model training, and evaluation.
+A machine learning project that builds and evaluates models to predict passenger survival on the Titanic dataset. This project combines data exploration, feature engineering, and model training using scikit-learn and Jupyter notebooks.
 
 ---
 
-# Project Goal
+## About the Project
 
-Build a machine learning model that predicts:
+This project analyzes the famous Titanic dataset and develops predictive models to determine which passengers were more likely to survive the disaster. The analysis includes:
 
-```
-0 → Passenger did not survive
+- **Data Exploration & Visualization**: Understanding passenger demographics and survival patterns
+- **Feature Engineering**: Creating meaningful features from raw data
+- **Model Development**: Training and comparing multiple machine learning algorithms
+- **Model Evaluation**: Assessing performance using appropriate metrics
 
-1 → Passenger survived
-```
+This is more of a self-study project and for educational purposes. There might be a lot of errors and mistakes, but it is part of a studies journey. 
 
-given information about a passenger.
-
-This is a **binary classification problem**.
-
----
-
-# Dataset
-
-Dataset:
-
-**Titanic - Machine Learning from Disaster**
-
-Source:
-
-Kaggle Titanic Competition
-
-The main dataset used:
-
-```
-data/raw/train.csv
-```
-
-The dataset contains information about passengers, including:
-
-- passenger class
-- age
-- gender
-- ticket information
-- family information
-- fare
-- cabin information
-- embarkation port
-
-Target column:
-
-```
-Survived
-```
+Feel free to leave hints and notes!
 
 ---
 
-# Machine Learning Workflow
-
-The project follows this workflow:
-
-```
-Data collection
-        ↓
-Exploratory data analysis
-        ↓
-Data cleaning
-        ↓
-Feature engineering
-        ↓
-Feature encoding
-        ↓
-Train/test split
-        ↓
-Model training
-        ↓
-Model evaluation
-        ↓
-Model improvement
-        ↓
-Model saving
-```
-
----
-
-# Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Scikit-learn
-- Jupyter Notebook
-
----
-
-# Project Structure
-
-- `notebooks/` contains exploratory analysis and experiments.
-- `src/` contains reusable machine learning code.
-- `scripts/` contains executable commands for downloading data, training, predicting, and resetting the project.
-- `docs/` contains project notes and decisions.
-- `pyproject.toml` and `uv.lock` define the reproducible Python environment.
+## Project Structure
 
 ```
 titanic-survival-prediction/
-│
-├── docs/
-│   └── notes.md
+├── README.md                          # This file
+├── pyproject.toml                     # Project metadata and dependencies
+├── requirements.txt                   # Pinned dependency versions
+├── .python-version                    # Python version specification (3.12)
+├── uv.lock                            # Locked dependencies for uv
 │
 ├── notebooks/
-│   └── titanic_survival.ipynb
+│   └── titanic_survival.ipynb         # Analysis and testing notebook
 │
-├── scripts/
-│   ├── download.py
-│   ├── train.py
-│   ├── predict.py
-│   └── reset.py
+├── data/                              # Dataset storage
+│   ├── raw/                           # Original Titanic datasets
+│   └── processed/                     # Cleaned and engineered features
+│
+├── models/                            # Trained model artifacts
+│   └── *.pkl                          # Serialized scikit-learn models
 │
 ├── src/
-│   ├── model.py
-│   └── preprocessing.py
+│   └── titanic_ml/                    # Python package for shared utilities
 │
-├── .gitignore
-├── .python-version
-├── README.md
-├── pyproject.toml
-├── requirements.txt
-└── uv.lock
+├── scripts/                           # Utility scripts
+│
+├── docs/                              # Documentation and task
+│
+└── logs/                              # Logs and output files
 ```
 
 ---
 
-# How to Run
+## Requirements
 
-Using
-```
-pip
-```
+- Python 3.12+
+- Dependencies listed in `pyproject.toml` / `requirements.txt`
 
-or
-using
-```
-uv 
-```
+### Key Dependencies
 
+- **pandas**: Data manipulation and analysis
+- **numpy**: Numerical computing
+- **scikit-learn**: Machine learning algorithms
+- **matplotlib**: Data visualization
+- **kaggle**: Dataset downloading from Kaggle
+- **jupyter/ipykernel**: Interactive notebooks
 
-## 1. Clone the repository
+---
+
+## Setup & Installation
+
+### Option 1: Using `uv` (Recommended)
+
+[uv](https://github.com/astral-sh/uv) is a fast Python package manager. If you have it installed:
 
 ```bash
-git clone MagicBardo/titanic-survival-prediction
+# Clone the repository
+git clone https://github.com/MagicBardo/titanic-survival-prediction.git
 cd titanic-survival-prediction
-```
 
-## 2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-or 
-
-```bash
+# Install dependencies with uv
 uv sync
+
+# Activate the virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Start Jupyter
+jupyter notebook
 ```
 
-## 3. Download the dataset
-
-Run:
+### Option 2: Using `pip`
 
 ```bash
-python scripts/download.py
+# Clone the repository
+git clone https://github.com/MagicBardo/titanic-survival-prediction.git
+cd titanic-survival-prediction
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start Jupyter
+jupyter notebook
 ```
 
-or 
+---
+
+## Usage
+
+### Running the Analysis
+
+1. Open `notebooks/titanic_survival.ipynb` in Jupyter:
+   ```bash
+   jupyter notebook notebooks/titanic_survival.ipynb
+   ```
+
+2. Execute the cells sequentially to:
+   - Load and explore the Titanic dataset
+   - Perform data preprocessing and feature engineering
+   - Train multiple classification models
+   - Evaluate model performance
+
+    **Note**: This notebook it pretty messy and not built for readability. It was just meant for first exploration and testing before writing real scripts.
+
+### Dataset
+
+The Titanic dataset can be obtained from [Kaggle](https://www.kaggle.com/c/titanic). To download it manually:
+
+```bash
+# Set up Kaggle API credentials (see https://github.com/Kaggle/kaggle-api)
+kaggle competitions download -c titanic
+```
+
+Or use the ```scripts/download.py``` file by running:
 
 ```bash
 uv run python scripts/download.py
 ```
 
-## 4. Open the notebook
+Raw data is placed in the `data/raw/` directory.
 
-Start Jupyter:
+### Preprocessing & Training
 
-```bash
-jupyter notebook
-```
+When the data is downloaded, you can train the model with the automatically first processed data.
 
-or 
+A direct analysis of the accuracy is logged in ```logs/```. The trained model will be saved in ```models/```.
 
-```bash
-uv run jupyter notebook
-```
-
-Open:
-
-```
-notebooks/titanic_survival.ipynb
-```
-
-## 5. Reset data folder (if needed)
-
-Empties ```data/raw``` and ```data/preprocessed```
+To run all this, type:
 
 ```bash
-python scripts/reset.py
+uv run python scripts/train.py
 ```
 
-or 
+### Predict
+
+There is an example passenger hard coded in the ```scripts/predict.py``` file. The script predicts the life or death of this passenger. Play around with the values and look at the output. 
+
+In the future there maybe will be a more user-friendly predicting usage. 
+
+To see the result, run:
 
 ```bash
-uv run python scripts/reset.py
+uv run python scripts/predict.py
 ```
 
 ---
 
-# Model
+## File Guide
 
-The project uses supervised learning.
-
-Initial models:
-
-- Decision Tree Classifier
-- Random Forest Classifier
-- Logistic Regression
-
-Models are evaluated and compared using classification metrics.
-
----
-
-# Results
-
-Results will be logged after completing accuracy experiments.
-
-Example:
-
-```
-Model:
-DecisionTreeClassifier
-
-Accuracy:
-XX%
-
-F1 Score:
-XX%
-```
+| File/Directory | Purpose                                                      |
+|---|--------------------------------------------------------------|
+| `notebooks/titanic_survival.ipynb` | Messy Jupyter notebook for basic analysis and first training |
+| `pyproject.toml` | Project metadata, dependencies, and build configuration      |
+| `requirements.txt` | Exact dependency versions for reproducibility                |
+| `models/` | Stores trained model files (`.joblib` format)                |
+| `data/` | Raw and processed datasets                                   |
+| `src/titanic_ml/` | Reusable Python modules and utilities                        |
+| `scripts/` | Helper scripts for data processing or model evaluation       |
+| `docs/` | Additional documentation                                     |
+| `logs/` | Output logs and experiment tracking                          |
 
 ---
 
-# Learning Goals
+## Future Plans
 
-During this project I learned:
-
-- how to explore a dataset
-- how to handle missing values
-- how to prepare data for machine learning
-- how classification models work
-- how to train and evaluate models
-- how to improve machine learning results
-
-Detailed notes and decisions can be found in:
-
-```
-docs/learning_notes.md
-```
+- [ ] Add cross-validation analysis
+- [ ] Implement hyperparameter tuning
+- [ ] Create model comparison visualizations
+- [ ] Build an API for making predictions
+- [ ] Add unit tests
+- [ ] Deploy as a web service
 
 ---
 
-# Future Improvements
+## Contributing
 
-Possible improvements:
+Feel free to fork this repository, make improvements, and submit pull requests!
 
-- better feature engineering
-- hyperparameter tuning
-- model comparison
-- creating a prediction API
-- deploying the model
+---
 
+## License
+
+This project is open source and available under the MIT License.
+
+___
+
+**Questions or Issues?** Feel free to open an issue or contact the repository owner.
