@@ -2,12 +2,13 @@ import joblib
 import pandas as pd
 
 from titanic_ml.preprocessing import engineer_features
+from titanic_ml.paths import MODELS
 
 
 def main():
 
     pipeline = joblib.load(
-        "../models/titanic_model.pkl"
+        MODELS / "titanic_model.pkl"
     )
 
     passenger = pd.DataFrame([
