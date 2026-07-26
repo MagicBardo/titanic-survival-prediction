@@ -1,0 +1,1 @@
+{"timestamp": "2026-07-26 18:30:26.282931", "model": "decision_tree", "accuracy": 0.8268156424581006, "features": ["Pclass", "Sex", "Age", "Has_Cabin", "Fare", "Embarked", "Family_Size", "Title", "Age_Group"], "random_state": 42, "train_size": 712, "test_size": 179}
