@@ -51,7 +51,7 @@ def log_accuracy(pipeline, model_name, df,y_train, X_test, y_test) -> None:
         "test_size": y_test.shape[0]
     }
 
-    with open(LOGS / "training.json", "a") as f:
+    with open(LOGS / "training.json", "w") as f:
         json.dump(data, f)
 
 
