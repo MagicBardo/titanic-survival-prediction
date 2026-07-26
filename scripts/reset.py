@@ -1,6 +1,6 @@
 import shutil
 
-from src.paths import DATA, RAW_DATA, PROCESSED_DATA, MODELS, LOGS
+from src.titanic_ml.paths import DATA, RAW_DATA, PROCESSED_DATA, MODELS, LOGS
 
 
 def reset_data_folder():

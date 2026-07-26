@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 
-from src.preprocessing import engineer_features
+from titanic_ml.preprocessing import engineer_features
 
 
 def main():

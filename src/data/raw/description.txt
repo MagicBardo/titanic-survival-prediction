@@ -1,15 +1,4 @@
-import zipfile
-import shutil
-import kaggle
-
-from titanic_ml.paths import RAW_DATA, TEMPORARY
-
-
-print("Started downloading dataset...")
-
-# Description from kaggle page of competition
-# will be added as txt file into data/raw/ folder
-data_description = """Data Dictionary:
+Data Dictionary:
 ----------------
 +----------+---------------------------------------------+------------------------------------------+
 | Variable | Definition                                  | Key                                      |
@@ -38,38 +27,9 @@ age: Age is fractional if less than 1. If the age is estimated, is it in the for
 
 sibsp: The dataset defines family relations in this way...
 Sibling = brother, sister, stepbrother, stepsister
-Spouse = husband, wife (mistresses and fiancÃ©s were ignored)
+Spouse = husband, wife (mistresses and fiancés were ignored)
 
 parch: The dataset defines family relations in this way...
 Parent = mother, father
 Child = daughter, son, stepdaughter, stepson
-Some children traveled only with a nanny, therefore parch=0 for them."""
-
-# Competition
-COMPETITION = "titanic"
-
-# Paths
-RAW_DATA.mkdir(parents=True, exist_ok=True)
-
-TEMPORARY.mkdir(parents=True, exist_ok=True)
-
-# Download dataset
-kaggle.api.competition_download_files(
-    COMPETITION,
-    path=TEMPORARY
-)
-
-# Extract only train.csv
-zip_file = TEMPORARY / "titanic.zip"
-
-with zipfile.ZipFile(zip_file, "r") as zip_ref:
-    zip_ref.extract("train.csv", RAW_DATA)
-
-# Adding data description for train.csv
-with open(RAW_DATA / "description.txt", "w") as file:
-    file.write(data_description)
-
-# Cleanup
-shutil.rmtree(TEMPORARY)
-
-print("Dataset downloaded successfully.")
+Some children traveled only with a nanny, therefore parch=0 for them.

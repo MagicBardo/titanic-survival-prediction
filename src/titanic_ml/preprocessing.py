@@ -5,7 +5,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import SimpleImputer
 
-from src.paths import PROCESSED_DATA
+from titanic_ml.paths import PROCESSED_DATA
 
 
 def age_group(age: int) -> str:

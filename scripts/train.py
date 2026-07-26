@@ -7,9 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
-from src.preprocessing import engineer_features, create_preprocessing_pipeline
-from src.model import create_model, RANDOM_STATE
-from src.paths import RAW_DATA, MODELS, LOGS
+from titanic_ml.preprocessing import engineer_features, create_preprocessing_pipeline
+from titanic_ml.model import create_model, RANDOM_STATE
+from titanic_ml.paths import RAW_DATA, MODELS, LOGS
 
 
 TARGET = "Survived"

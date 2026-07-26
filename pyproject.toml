@@ -1,7 +1,7 @@
 [project]
 name = "titanic-survival-prediction"
 version = "0.1.0"
-description = "Add your description here"
+description = "Machine learning model predicting Titanic survival"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -15,3 +15,10 @@ dependencies = [
     "pathlib>=1.0.1",
     "scikit-learn>=1.9.0",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/titanic_ml"]
