@@ -3,12 +3,21 @@ import shutil
 from titanic_ml.paths import DATA, RAW_DATA, PROCESSED_DATA, MODELS, LOGS
 
 
+def recreate_folder_with_gitkeep(folder):
+    folder.mkdir(parents=True, exist_ok=True)
+
+    gitkeep = folder / ".gitkeep"
+
+    if not gitkeep.exists():
+        gitkeep.touch()
+
+
 def reset_data_folder():
     if DATA.exists():
         shutil.rmtree(DATA)
 
-    RAW_DATA.mkdir(parents=True)
-    PROCESSED_DATA.mkdir(parents=True)
+    recreate_folder_with_gitkeep(RAW_DATA)
+    recreate_folder_with_gitkeep(PROCESSED_DATA)
 
     print("Data folder reset successfully.")
 
@@ -17,7 +26,7 @@ def reset_models_folder():
     if MODELS.exists():
         shutil.rmtree(MODELS)
 
-    MODELS.mkdir(parents=True)
+    recreate_folder_with_gitkeep(MODELS)
 
     print("Models folder reset successfully.")
 
@@ -25,7 +34,7 @@ def reset_logs_folder():
     if LOGS.exists():
         shutil.rmtree(LOGS)
 
-    LOGS.mkdir(parents=True)
+    recreate_folder_with_gitkeep(LOGS)
 
     print("Logs folder reset successfully.")
 
