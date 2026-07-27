@@ -53,7 +53,7 @@ def save_engineered_features(df: pd.DataFrame) -> None:
 
     df.to_csv(PROCESSED_DATA / "engineered.csv", header=True, index=True)
 
-    print(f"Training data was preprocessed successfully and saved in {PROCESSED_DATA}")
+    print(f"Training data preprocessed and saved in {PROCESSED_DATA}")
 
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:

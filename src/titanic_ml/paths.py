@@ -7,5 +7,6 @@ RAW_DATA = DATA / "raw"
 PROCESSED_DATA = DATA / "processed"
 TEMPORARY = DATA / "tmp"
 MODELS = PROJECT_ROOT / "models"
+ARCHIVE = MODELS / "archive"
 LOGS = PROJECT_ROOT / "logs"
 

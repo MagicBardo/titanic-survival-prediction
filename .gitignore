@@ -30,6 +30,8 @@ data/processed/*
 # Trained models
 models/*
 !models/.gitkeep
+!models/archive/
+!models/archive/.gitkeep
 
 # Log files
 logs/*

@@ -1,6 +1,6 @@
 import shutil
 
-from titanic_ml.paths import DATA, RAW_DATA, PROCESSED_DATA, MODELS, LOGS
+from titanic_ml.paths import DATA, RAW_DATA, PROCESSED_DATA, MODELS, ARCHIVE, LOGS
 
 
 def recreate_folder_with_gitkeep(folder):
@@ -27,6 +27,7 @@ def reset_models_folder():
         shutil.rmtree(MODELS)
 
     recreate_folder_with_gitkeep(MODELS)
+    recreate_folder_with_gitkeep(ARCHIVE)
 
     print("Models folder reset successfully.")
 
