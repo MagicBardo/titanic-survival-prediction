@@ -1,4 +1,4 @@
-from sklearn.base import ClassifierMixin
+from sklearn.base import BaseEstimator
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -9,7 +9,7 @@ DECISION_TREE = "decision_tree"
 RANDOM_FOREST = "random_forest"
 LOGISTIC_REGRESSION = "logistic_regression"
 
-def create_model(model_name:str) -> ClassifierMixin:
+def create_model(model_name:str) -> BaseEstimator:
     """
     Creating ML model based on given model name
 

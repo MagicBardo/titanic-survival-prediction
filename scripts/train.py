@@ -10,6 +10,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 from titanic_ml.preprocessing import engineer_features, create_preprocessing_pipeline
 from titanic_ml.model import create_model, RANDOM_STATE
 from titanic_ml.paths import RAW_DATA, MODELS, LOGS
+from titanic_ml.pipeline import create_pipeline
 
 
 TARGET = "Survived"
@@ -88,16 +89,7 @@ def main(model_name:str) -> None:
         random_state=42
     )
 
-    pipeline = Pipeline([
-        (
-            "preprocessor",
-            create_preprocessing_pipeline()
-        ),
-        (
-            "model",
-            create_model(model_name)
-        )
-    ])
+    pipeline = create_pipeline(model_name)
 
     pipeline.fit(
         X_train,

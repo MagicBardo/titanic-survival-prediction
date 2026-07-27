@@ -166,6 +166,16 @@ To see the result, run:
 uv run python scripts/predict.py
 ```
 
+### Reseting
+
+To reset the project to the status of cloning but still with all packages installed, you can run
+
+```bash
+uv run python scripts/reset.py
+```
+
+With user acceptance, it deletes all files in ```data/raw```, ```data/processed```, ```models/``` and ```logs/```
+
 ---
 
 ## File Guide
@@ -186,6 +196,7 @@ uv run python scripts/predict.py
 
 ## Future Plans
 
+- [ ] Add versioning of models
 - [ ] Add cross-validation analysis
 - [ ] Implement hyperparameter tuning
 - [ ] Create model comparison visualizations
